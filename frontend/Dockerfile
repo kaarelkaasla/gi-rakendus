@@ -1,8 +1,11 @@
-FROM node:lts-alpine
-RUN npm install -g http-server
-WORKDIR /gi-rakendus/frontend
+FROM node:latest as build-stage
+WORKDIR /frontend
 COPY package*.json ./
-RUN npm install --production
-COPY . .
+RUN npm install
+COPY ./ .
 RUN npm run build
-CMD ["http-server", "dist", "-p", "8081"]
+
+FROM nginx as production-stage
+RUN mkdir /frontend
+COPY --from=build-stage /frontend/dist /frontend
+COPY nginx.conf /etc/nginx/nginx.conf
