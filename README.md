@@ -10,7 +10,7 @@ Täpsemalt kasutatud tähtsamad tehnoloogiad:
 - Spring Security
 - JWT
 - Postgres
-- Hibernate
+- Spring JPA
 - Javascript
 - Vue.js
 - Vuex
